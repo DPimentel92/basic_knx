@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        	<title>KNX Remote Control</title>
+        	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	</head>
+
+<body>
+<header class="jumbotron">
+    <div class="container">
+        <h1>KNX Remote Controler</h1>
+        <p>
+            <a class="btn btn-primary btn-large" href="/control/">Pagina Principal</a>
+            <a class="btn btn-primary btn-large" href="/control/test_device">Testar Dispositivo</a>
+        </p>
+    </div>
+</header>
+
+<div class="container">
+        <div class="row text-center">
+                <% images.forEach(function(images){ %>
+                        <div class="col-md-4 col-sm-6">
+                                <div>
+                                    <h3><%= images.description %></h3>
+                                    <img src="<%= images.src %>" height="300" width="300">
+                                    <form action="/control" method="POST">
+                                        <p><%= images.name %></p>
+                                            <% for(var i = 0; i < images.index; i++) { %>
+                                                <div class="col-md-6">
+                                                    <input class="form-control" type="text" name="group<%=i+1%>" placeholder="Grupo <%=i+1%>">
+                                                    <br>
+                                                </div>
+                                            <% } %>
+                                        <button class="btn btn-lg btn-primary btn-block">Submeter Grupos</button>
+                                        <br>
+                                    </form>
+                                </div>
+                        </div>
+                <% }); %>
+
+        </div>
+
+</div>
+
+</body>
+</html>
