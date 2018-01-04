@@ -40,24 +40,56 @@ exports.home = function(req, res) {
 
 
 var images = [
-            {name:"MTN649208", description:"Actuador Binário", src:"http://sigma.octopart.com/82891339/image/Schneider-Electric-MTN649208.jpg", index:8},
+            {name:"MTN649208", description:"Actuador Binário", src:"http://sigma.octopart.com/82891339/image/Schneider-Electric-MTN649208.jpg", index:6},
             {name:"MTN649802", description:"Actuador Estores", src:"http://gds-eshop.com/files/imagecache/product_full/P123569-PPT.jpg", index:2},
             {name:"MTN649330", description:"Actuador Regulação", src:"http://www.harveyjames.net/uploads/images/l/fm_2013_10_18_09_50_37_52112.jpg", index:2}
         ];
 
 exports.addDevice = function(req,res) {
 	res.render("add_device.ejs",{images: images});
+
 };
 
 exports.testDevice = function(req, res) {
 	res.render("test_device.ejs");
+
 };
+
+
+var groups = [];
 
 exports.saveDevice = function(req, res) {
 
-	var group1 = req.body.group1;
-	var group2 = req.body.group2;
-	console.log(group1);
-	console.log(group2);
-	res.redirect("/control");
+	var 	devName = req.body.name,
+		group1 = req.body.group1,
+		group2 = req.body.group2,
+		group3 = req.body.group3,
+		group4 = req.body.group4,
+		group5 = req.body.group5,
+		group6 = req.body.group6;
+
+	if(devName === images[0].name){
+		var newDevice = {group1: group1,
+				 group2: group2,
+				 group3: group3,
+				 group4: group4,
+				 groyp5: group5,
+				 group6: group6,
+				 devName: devName};
+	}else if(devName === images[0].name){
+		var newDevice = {group1: group1,
+				 group2: group2,
+				 devName:devName};
+
+	}else{
+		var newDevice = {group1: group1,
+                                 group2: group2,
+				 devName: devName};
+	}
+	groups.push(newDevice);
+
+	console.log(newDevice);
+	//res.redirect("add_device");
+	res.render("add_device",{images: images});
+	
 };
